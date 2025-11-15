@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/button";
 import AddCityDialog from "@/components/AddCityDialog";
-import { MapPin, User, Plus, Menu, LogOut } from "lucide-react";
+import { MapPin, User, Plus, Menu, LogOut, X } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Navigation = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleSignOut = async () => {
     try {
@@ -33,16 +35,20 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
-            <Link to="/map">
-              <Button variant="ghost" className="text-foreground hover:text-primary">
-                Mi Mapa
-              </Button>
-            </Link>
-            <Link to="/cities">
-              <Button variant="ghost" className="text-foreground hover:text-primary">
-                Mis Ciudades
-              </Button>
-            </Link>
+            {user && (
+              <>
+                <Link to="/map">
+                  <Button variant="ghost" className="text-foreground hover:text-primary">
+                    Mi Mapa
+                  </Button>
+                </Link>
+                <Link to="/cities">
+                  <Button variant="ghost" className="text-foreground hover:text-primary">
+                    Mis Ciudades
+                  </Button>
+                </Link>
+              </>
+            )}
             {user ? (
               <>
                 <Button 
@@ -66,10 +72,71 @@ const Navigation = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <Button variant="ghost" size="sm" className="md:hidden">
-            <Menu className="h-5 w-5" />
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="md:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
           </Button>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t border-border py-4">
+            <div className="flex flex-col gap-2">
+              {user && (
+                <>
+                  <Link 
+                    to="/map" 
+                    className="px-4 py-2 text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Mi Mapa
+                  </Link>
+                  <Link 
+                    to="/cities" 
+                    className="px-4 py-2 text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Mis Ciudades
+                  </Link>
+                </>
+              )}
+              {user ? (
+                <>
+                  <div className="px-4 py-2">
+                    <AddCityDialog />
+                  </div>
+                  <button
+                    onClick={() => {
+                      handleSignOut();
+                      setMobileMenuOpen(false);
+                    }}
+                    className="px-4 py-2 text-left text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors flex items-center gap-2"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Cerrar Sesión
+                  </button>
+                </>
+              ) : (
+                <Link 
+                  to="/auth" 
+                  className="px-4 py-2 text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors flex items-center gap-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <User className="h-4 w-4" />
+                  Iniciar Sesión
+                </Link>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );

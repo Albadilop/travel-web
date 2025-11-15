@@ -12,7 +12,7 @@ const TravelHero = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Hero Background */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-sm"
         style={{
           backgroundImage: `url(${heroImage})`,
         }}
@@ -30,7 +30,7 @@ const TravelHero = () => {
             </span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-black">
             Guarda cada momento, cada ciudad y cada experiencia de tus viajes en un mapa interactivo lleno de recuerdos.
           </p>
 
