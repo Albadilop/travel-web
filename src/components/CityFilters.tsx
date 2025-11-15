@@ -42,16 +42,16 @@ const CityFilters = ({ filters, onFiltersChange }: CityFiltersProps) => {
           <div className="flex flex-col gap-2">
             <label className="text-sm font-medium text-foreground">Valoración mínima</label>
             <Select
-              value={filters.rating?.toString() || ""}
+              value={filters.rating?.toString() || "all"}
               onValueChange={(value) => 
-                onFiltersChange({ ...filters, rating: value ? parseInt(value) : null })
+                onFiltersChange({ ...filters, rating: value === "all" ? null : parseInt(value) })
               }
             >
               <SelectTrigger className="w-40">
                 <SelectValue placeholder="Todas" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">Todas</SelectItem>
+                <SelectItem value="all">Todas</SelectItem>
                 <SelectItem value="5">⭐⭐⭐⭐⭐ 5</SelectItem>
                 <SelectItem value="4">⭐⭐⭐⭐ 4+</SelectItem>
                 <SelectItem value="3">⭐⭐⭐ 3+</SelectItem>
@@ -64,16 +64,16 @@ const CityFilters = ({ filters, onFiltersChange }: CityFiltersProps) => {
           <div className="flex flex-col gap-2">
             <label className="text-sm font-medium text-foreground">Año</label>
             <Select
-              value={filters.year?.toString() || ""}
+              value={filters.year?.toString() || "all"}
               onValueChange={(value) => 
-                onFiltersChange({ ...filters, year: value ? parseInt(value) : null })
+                onFiltersChange({ ...filters, year: value === "all" ? null : parseInt(value) })
               }
             >
               <SelectTrigger className="w-32">
                 <SelectValue placeholder="Todos" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">Todos</SelectItem>
+                <SelectItem value="all">Todos</SelectItem>
                 {years.map(year => (
                   <SelectItem key={year} value={year.toString()}>
                     {year}
@@ -86,16 +86,16 @@ const CityFilters = ({ filters, onFiltersChange }: CityFiltersProps) => {
           <div className="flex flex-col gap-2">
             <label className="text-sm font-medium text-foreground">Mes</label>
             <Select
-              value={filters.month?.toString() || ""}
+              value={filters.month?.toString() || "all"}
               onValueChange={(value) => 
-                onFiltersChange({ ...filters, month: value ? parseInt(value) : null })
+                onFiltersChange({ ...filters, month: value === "all" ? null : parseInt(value) })
               }
             >
               <SelectTrigger className="w-40">
                 <SelectValue placeholder="Todos" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">Todos</SelectItem>
+                <SelectItem value="all">Todos</SelectItem>
                 {months.map(month => (
                   <SelectItem key={month.value} value={month.value.toString()}>
                     {month.label}

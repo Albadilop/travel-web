@@ -33,9 +33,9 @@ const MyMapPage = () => {
           <h1 className="text-3xl md:text-4xl font-bold font-poppins text-foreground mb-4">
             Mi Mapa de Viajes
           </h1>
-          <p className="text-lg text-muted-foreground">
-            Explora todos los destinos que has visitado
-          </p>
+          <p className="text-black text-lg">
+              Has visitado <span className="font-semibold text-foreground">{cities.length}</span> ciudades increíbles
+            </p>
         </div>
 
         {loading ? (
@@ -51,13 +51,6 @@ const MyMapPage = () => {
           </div>
         )}
 
-        {cities.length > 0 && (
-          <div className="mt-8 text-center">
-            <p className="text-muted-foreground">
-              Has visitado <span className="font-semibold text-foreground">{cities.length}</span> ciudades increíbles
-            </p>
-          </div>
-        )}
       </div>
     </div>
   );
