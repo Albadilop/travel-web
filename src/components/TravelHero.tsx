@@ -12,7 +12,7 @@ const TravelHero = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Hero Background */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-sm"
         style={{
           backgroundImage: `url(${heroImage})`,
         }}
@@ -30,7 +30,7 @@ const TravelHero = () => {
             </span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-black">
             Guarda cada momento, cada ciudad y cada experiencia de tus viajes en un mapa interactivo lleno de recuerdos.
           </p>
 
@@ -50,18 +50,13 @@ const TravelHero = () => {
                 </Button>
               </Link>
             )}
-            {user ? (
+            {user && (
               <AddCityDialog trigger={
                 <Button variant="outline" size="lg" className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground text-lg px-8 py-6">
                   <Camera className="mr-2 h-5 w-5" />
                   Añadir Nueva Ciudad
                 </Button>
               } />
-            ) : (
-              <Button variant="outline" size="lg" className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground text-lg px-8 py-6">
-                <Camera className="mr-2 h-5 w-5" />
-                Descubrir Más
-              </Button>
             )}
           </div>
 

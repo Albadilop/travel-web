@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
@@ -18,25 +18,37 @@ export const useCities = () => {
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
-  const fetchCities = async () => {
+  const fetchCities = useCallback(async () => {
     try {
+      // Check if user is authenticated
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        setCities([]);
+        setLoading(false);
+        return;
+      }
+
       const { data, error } = await supabase
         .from('cities')
         .select('*')
+        .eq('user_id', user.id)
         .order('visit_date', { ascending: false });
 
       if (error) throw error;
       setCities(data || []);
     } catch (error) {
+      console.error('Error fetching cities:', error);
       toast({
         title: "Error",
         description: "No se pudieron cargar las ciudades. Inicia sesión para ver tus datos.",
         variant: "destructive",
       });
+      setCities([]);
     } finally {
       setLoading(false);
     }
-  };
+  }, [toast]);
 
   const updateCity = async (id: string, cityData: Partial<Omit<City, 'id'>>) => {
     try {
@@ -143,6 +155,15 @@ export const useCities = () => {
   useEffect(() => {
     fetchCities();
 
+    // Set up auth state listener to refetch when user changes
+    const { data: { subscription: authSubscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (event === 'SIGNED_IN' || event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED') {
+          fetchCities();
+        }
+      }
+    );
+
     // Set up real-time subscription
     const subscription = supabase
       .channel('cities_changes')
@@ -156,8 +177,9 @@ export const useCities = () => {
 
     return () => {
       supabase.removeChannel(subscription);
+      authSubscription.unsubscribe();
     };
-  }, []);
+  }, [fetchCities]);
 
   return {
     cities,

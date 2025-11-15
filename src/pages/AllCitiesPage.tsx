@@ -8,7 +8,7 @@ import { useState } from "react";
 
 const AllCitiesPage = () => {
   const { cities, loading } = useCities();
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const [filters, setFilters] = useState({
     rating: null as number | null,
     year: null as number | null,
@@ -16,7 +16,7 @@ const AllCitiesPage = () => {
   });
 
   const filteredCities = cities.filter(city => {
-    if (filters.rating && city.rating < filters.rating) return false;
+    if (filters.rating && city.rating && city.rating < filters.rating) return false;
     if (filters.year) {
       const cityYear = new Date(city.visit_date).getFullYear();
       if (cityYear !== filters.year) return false;
@@ -27,6 +27,21 @@ const AllCitiesPage = () => {
     }
     return true;
   });
+
+  // Show loading state while checking authentication
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <div className="container mx-auto px-6 pt-24">
+          <div className="text-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Cargando...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!user) {
     return (
@@ -54,8 +69,8 @@ const AllCitiesPage = () => {
           <h1 className="text-3xl md:text-4xl font-bold font-poppins text-foreground mb-4">
             Todas Mis Ciudades
           </h1>
-          <p className="text-lg text-muted-foreground mb-6">
-            {cities.length} destinos en tu diario de viajes
+          <p className="text-lg text-black mb-6">
+            <span className="font-semibold text-foreground">{cities.length}</span> destinos en tu diario de viajes
           </p>
         </div>
 
