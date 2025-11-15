@@ -11,7 +11,7 @@ const CityRanking = ({ cities }: CityRankingProps) => {
   const topCities = cities
     .filter(city => city.rating >= 4)
     .sort((a, b) => b.rating - a.rating)
-    .slice(0, 10);
+    .slice(0, 5);
 
   if (topCities.length === 0) {
     return (
