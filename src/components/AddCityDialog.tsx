@@ -244,7 +244,7 @@ const AddCityDialog = ({ trigger }: AddCityDialogProps) => {
   };
 
   const defaultTrigger = (
-    <Button className="bg-gradient-warm hover:opacity-90 transition-all duration-300">
+    <Button className="bg-gradient-warm hover:opacity-90 transition-all duration-300 rounded-full">
       <Plus className="h-4 w-4 mr-2" />
       Añadir Ciudad
     </Button>

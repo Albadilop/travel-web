@@ -38,12 +38,12 @@ const Navigation = () => {
             {user && (
               <>
                 <Link to="/map">
-                  <Button variant="ghost" className="text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors">
+                  <Button variant="ghost" className="rounded-full text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors">
                     Mi Mapa
                   </Button>
                 </Link>
                 <Link to="/cities">
-                  <Button variant="ghost" className="text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors">
+                  <Button variant="ghost" className="rounded-full text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors">
                     Mis Ciudades
                   </Button>
                 </Link>
@@ -53,7 +53,7 @@ const Navigation = () => {
               <>
                 <Button 
                   variant="ghost" 
-                  className="text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors"
+                  className="rounded-full text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors"
                   onClick={handleSignOut}
                 >
                   <LogOut className="h-4 w-4 mr-2" />
@@ -63,7 +63,7 @@ const Navigation = () => {
               </>
             ) : (
               <Link to="/auth">
-                <Button variant="ghost" className="text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors">
+                <Button variant="ghost" className="rounded-full text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors">
                   <User className="h-4 w-4 mr-2" />
                   Iniciar Sesión
                 </Button>

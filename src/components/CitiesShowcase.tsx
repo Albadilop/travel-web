@@ -18,7 +18,7 @@ const CitiesShowcase = () => {
             <h2 className="text-3xl md:text-4xl font-bold font-poppins text-foreground mb-4">
               Mis Ciudades Favoritas
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-black">
               {user ? `${cities.length} destinos que han marcado tu corazón viajero` : 'Inicia sesión para ver tus destinos favoritos'}
             </p>
           </div>
@@ -26,21 +26,21 @@ const CitiesShowcase = () => {
           <div className="flex gap-3 mt-6 md:mt-0">
             {user ? (
               <AddCityDialog trigger={
-                <Button variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                <Button variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground rounded-full">
                   <Plus className="mr-2 h-4 w-4" />
                   Añadir Ciudad
                 </Button>
               } />
             ) : (
               <Link to="/auth">
-                <Button variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                <Button variant="outline" className="rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground ">
                   <Plus className="mr-2 h-4 w-4" />
                   Iniciar Sesión
                 </Button>
               </Link>
             )}
             <Link to="/cities">
-              <Button className="bg-gradient-warm hover:opacity-90 transition-all duration-300">
+              <Button className="bg-gradient-warm hover:opacity-90 transition-all duration-300 rounded-full">
                 Ver Todas
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -83,7 +83,7 @@ const CitiesShowcase = () => {
                 } />
               ) : (
                 <Link to="/auth">
-                  <Button size="sm" className="bg-gradient-warm hover:opacity-90 transition-all duration-300">
+                  <Button size="sm" className=" rounded-full bg-gradient-warm hover:opacity-90 transition-all duration-300">
                     Iniciar Sesión
                   </Button>
                 </Link>

@@ -23,7 +23,7 @@ const TravelHero = () => {
       {/* Hero Content */}
       <div className="relative z-10 container mx-auto px-6 text-center">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold font-poppins text-foreground mb-6">
+          <h1 className="text-5xl md:text-7xl font-bold font-poppins text-black mb-6">
             Tu Diario de
             <span className="block bg-gradient-warm bg-clip-text text-transparent">
               Aventuras
@@ -37,14 +37,14 @@ const TravelHero = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             {user ? (
               <Link to="/cities">
-                <Button size="lg" className="bg-gradient-warm hover:opacity-90 transition-all duration-300 shadow-warm text-lg px-8 py-6">
+                <Button size="lg" className="bg-gradient-warm hover:opacity-90 transition-all duration-300 shadow-warm text-lg px-8 py-6 rounded-full">
                   <MapPin className="mr-2 h-5 w-5" />
                   Explorar Mis Viajes
                 </Button>
               </Link>
             ) : (
               <Link to="/auth">
-                <Button size="lg" className="bg-gradient-warm hover:opacity-90 transition-all duration-300 shadow-warm text-lg px-8 py-6">
+                <Button size="lg" className="bg-gradient-warm hover:opacity-90 transition-all duration-300 shadow-warm text-lg px-8 py-6 rounded-full">
                   <MapPin className="mr-2 h-5 w-5" />
                   Comenzar Aventura
                 </Button>
@@ -52,7 +52,7 @@ const TravelHero = () => {
             )}
             {user && (
               <AddCityDialog trigger={
-                <Button variant="outline" size="lg" className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground text-lg px-8 py-6">
+                <Button variant="outline" size="lg" className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground text-lg px-8 py-6 rounded-full">
                   <Camera className="mr-2 h-5 w-5" />
                   Añadir Nueva Ciudad
                 </Button>
