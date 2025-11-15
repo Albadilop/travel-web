@@ -338,7 +338,7 @@ const AddCityDialog = ({ trigger }: AddCityDialogProps) => {
                     <option key={num} value={num}>{num}</option>
                   ))}
                 </select>
-                <Star className="h-4 w-4 text-accent fill-current" />
+                <Star className="h-4 w-4 text-orange-500 fill-orange-500 hover:text-orange-500 hover:fill-orange-500" />
               </div>
             </div>
             <div className="space-y-2">

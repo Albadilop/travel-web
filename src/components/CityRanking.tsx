@@ -50,7 +50,7 @@ const CityRanking = ({ cities }: CityRankingProps) => {
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
                   index === 0 ? 'bg-gradient-to-r from-yellow-400 to-yellow-600 text-white' :
                   index === 1 ? 'bg-gradient-to-r from-gray-300 to-gray-500 text-white' :
-                  'bg-gradient-to-r from-orange-400 to-orange-600 text-white'
+                  'bg-gradient-to-r from-amber-700 to-amber-900 text-white'
                 }`}>
                   {index + 1}
                 </div>
@@ -72,7 +72,7 @@ const CityRanking = ({ cities }: CityRankingProps) => {
             </div>
             
             <Badge className="flex items-center gap-1 bg-accent/20 text-accent border-accent/30">
-              <Star className="h-3 w-3 fill-current" />
+              <Star className="h-3 w-3 text-orange-500 fill-orange-500 hover:text-orange-500 hover:fill-orange-500" />
               <span className="text-black">{city.rating}</span>
             </Badge>
           </div>

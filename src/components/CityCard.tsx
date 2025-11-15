@@ -42,20 +42,26 @@ const CityCard = ({ city }: CityCardProps) => {
         />
         
         {/* Action Buttons */}
-        <div className="absolute top-3 right-3 flex gap-2">
+        <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <Button
             size="sm"
             variant="secondary"
-            className="bg-card/90 backdrop-blur-sm border-0 shadow-card h-8 w-8 p-0"
-            onClick={() => setShowEditDialog(true)}
+            className="bg-card/70 backdrop-blur-sm border-0 shadow-sm h-7 w-7 p-0 rounded-full hover:bg-card/90 transition-all"
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowEditDialog(true);
+            }}
           >
             <Edit className="h-3 w-3" />
           </Button>
           <Button
             size="sm"
             variant="destructive"
-            className="bg-destructive/90 backdrop-blur-sm border-0 shadow-card h-8 w-8 p-0"
-            onClick={handleDelete}
+            className="bg-destructive/70 backdrop-blur-sm border-0 shadow-sm h-7 w-7 p-0 rounded-full hover:bg-destructive/90 transition-all"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleDelete();
+            }}
           >
             <Trash2 className="h-3 w-3" />
           </Button>
@@ -64,7 +70,7 @@ const CityCard = ({ city }: CityCardProps) => {
         {/* Rating Badge */}
         <div className="absolute top-3 left-3">
           <Badge className="bg-card/90 backdrop-blur-sm border-0 shadow-card">
-            <Star className="h-3 w-3 text-accent mr-1 fill-current" />
+            <Star className="h-3 w-3 text-orange-500 mr-1 fill-orange-500 hover:text-orange-500 hover:fill-orange-500" />
             <span className="text-black">{city.rating}</span>
           </Badge>
         </div>
