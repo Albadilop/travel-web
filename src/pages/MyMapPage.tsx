@@ -33,7 +33,7 @@ const MyMapPage = () => {
           <h1 className="text-3xl md:text-4xl font-bold font-poppins text-foreground mb-4">
             Mi Mapa de Viajes
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-black text-lg">
               Has visitado <span className="font-semibold text-foreground">{cities.length}</span> ciudades increíbles
             </p>
         </div>

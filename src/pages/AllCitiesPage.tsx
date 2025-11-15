@@ -70,7 +70,7 @@ const AllCitiesPage = () => {
             Todas Mis Ciudades
           </h1>
           <p className="text-lg text-black mb-6">
-            {cities.length} destinos en tu diario de viajes
+            <span className="font-semibold text-foreground">{cities.length}</span> destinos en tu diario de viajes
           </p>
         </div>
 

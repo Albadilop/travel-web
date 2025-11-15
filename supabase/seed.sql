@@ -138,6 +138,56 @@ VALUES
     4,
     '2024-11-05',
     'Tecnología y tradición se mezclan perfectamente. La comida callejera es increíble.'
+  ),
+  (
+    '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12',
+    'Bangkok',
+    'Tailandia',
+    13.7563309,
+    100.5017651,
+    5,
+    '2024-12-20',
+    'Una ciudad vibrante con templos dorados y comida deliciosa. Los mercados flotantes son únicos.'
+  ),
+  (
+    '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12',
+    'Singapur',
+    'Singapur',
+    1.352083,
+    103.819836,
+    5,
+    '2025-01-10',
+    'La ciudad más limpia del mundo. Los jardines en la bahía son impresionantes.'
+  ),
+  (
+    '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12',
+    'Hong Kong',
+    'China',
+    22.3193039,
+    114.1693611,
+    4,
+    '2025-02-15',
+    'Rascacielos impresionantes y una mezcla fascinante de culturas orientales y occidentales.'
+  ),
+  (
+    '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12',
+    'Cairo',
+    'Egipto',
+    30.0444196,
+    31.2357116,
+    5,
+    '2025-03-22',
+    'Las pirámides de Giza son una de las maravillas del mundo. La historia antigua es fascinante.'
+  ),
+  (
+    '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12',
+    'Mumbai',
+    'India',
+    19.0759837,
+    72.8776559,
+    4,
+    '2025-04-18',
+    'Una ciudad de contrastes. La puerta de la India y los sabores locales son inolvidables.'
   )
 ON CONFLICT DO NOTHING;
 
@@ -233,101 +283,305 @@ VALUES
     5,
     '2024-12-15',
     'La capital más al norte del mundo. Las auroras boreales y los géiseres son únicos.'
+  ),
+  (
+    '90140f28-583c-4f6e-b437-d0b48bfa0a32',
+    'Copenhague',
+    'Dinamarca',
+    55.6760968,
+    12.5683371,
+    5,
+    '2025-01-25',
+    'La ciudad más feliz del mundo. La Sirenita y los canales son encantadores.'
+  ),
+  (
+    '90140f28-583c-4f6e-b437-d0b48bfa0a32',
+    'Edimburgo',
+    'Reino Unido',
+    55.953252,
+    -3.188267,
+    5,
+    '2025-02-28',
+    'Una ciudad medieval con un castillo imponente. El festival de Edimburgo es increíble.'
+  ),
+  (
+    '90140f28-583c-4f6e-b437-d0b48bfa0a32',
+    'Dublín',
+    'Irlanda',
+    53.3498053,
+    -6.2603097,
+    4,
+    '2025-03-15',
+    'La capital de Irlanda con pubs tradicionales y música en vivo. El Trinity College es hermoso.'
+  ),
+  (
+    '90140f28-583c-4f6e-b437-d0b48bfa0a32',
+    'Brujas',
+    'Bélgica',
+    51.209348,
+    3.2246995,
+    5,
+    '2025-04-10',
+    'Una ciudad de cuento de hadas con canales y arquitectura medieval. El chocolate es delicioso.'
+  ),
+  (
+    '90140f28-583c-4f6e-b437-d0b48bfa0a32',
+    'Florencia',
+    'Italia',
+    43.7695604,
+    11.2558136,
+    5,
+    '2025-05-05',
+    'La cuna del Renacimiento. El Duomo y la Galería Uffizi son imprescindibles.'
   )
 ON CONFLICT DO NOTHING;
 
 -- ============================================
 -- SEED FOR: realtime-for-the-cities-table migration (city_images)
 -- ============================================
--- Insert sample city images for user 1's cities
--- Note: These are placeholder URLs. Replace with actual image URLs from your storage bucket
+-- Insert images for user 1's cities (15 cities total)
+-- First 5 cities will have 2 images each, remaining 10 will have 1 image each
+
+-- París (2 images)
 INSERT INTO public.city_images (city_id, image_url, user_id)
-SELECT 
-  c.id,
-  'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800',
-  c.user_id
+SELECT c.id, 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800', c.user_id
 FROM public.cities c
-WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' 
-  AND c.name = 'París'
-LIMIT 1
+WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' AND c.name = 'París'
 ON CONFLICT DO NOTHING;
 
 INSERT INTO public.city_images (city_id, image_url, user_id)
-SELECT 
-  c.id,
-  'https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800',
-  c.user_id
+SELECT c.id, 'https://images.unsplash.com/photo-1502602898737-459b34a21c44?w=800', c.user_id
 FROM public.cities c
-WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' 
-  AND c.name = 'Roma'
-LIMIT 1
+WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' AND c.name = 'París'
+ON CONFLICT DO NOTHING;
+
+-- Roma (2 images)
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' AND c.name = 'Roma'
 ON CONFLICT DO NOTHING;
 
 INSERT INTO public.city_images (city_id, image_url, user_id)
-SELECT 
-  c.id,
-  'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800',
-  c.user_id
+SELECT c.id, 'https://images.unsplash.com/photo-1529260830199-42c24126f198?w=800', c.user_id
 FROM public.cities c
-WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' 
-  AND c.name = 'Tokio'
-LIMIT 1
+WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' AND c.name = 'Roma'
 ON CONFLICT DO NOTHING;
 
--- Insert sample city images for user 2's cities
+-- Tokio (2 images)
 INSERT INTO public.city_images (city_id, image_url, user_id)
-SELECT 
-  c.id,
-  'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800',
-  c.user_id
+SELECT c.id, 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800', c.user_id
 FROM public.cities c
-WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' 
-  AND c.name = 'Barcelona'
-LIMIT 1
+WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' AND c.name = 'Tokio'
 ON CONFLICT DO NOTHING;
 
 INSERT INTO public.city_images (city_id, image_url, user_id)
-SELECT 
-  c.id,
-  'https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=800',
-  c.user_id
+SELECT c.id, 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800', c.user_id
 FROM public.cities c
-WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' 
-  AND c.name = 'Amsterdam'
-LIMIT 1
+WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' AND c.name = 'Tokio'
+ON CONFLICT DO NOTHING;
+
+-- Nueva York (2 images)
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' AND c.name = 'Nueva York'
 ON CONFLICT DO NOTHING;
 
 INSERT INTO public.city_images (city_id, image_url, user_id)
-SELECT 
-  c.id,
-  'https://images.unsplash.com/photo-1541849546-216549ae216d?w=800',
-  c.user_id
+SELECT c.id, 'https://images.unsplash.com/photo-1500916434205-0c77489c6cf7?w=800', c.user_id
 FROM public.cities c
-WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' 
-  AND c.name = 'Santorini'
-LIMIT 1
+WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' AND c.name = 'Nueva York'
 ON CONFLICT DO NOTHING;
 
--- Add multiple images for some cities to demonstrate the relationship
+-- Londres (2 images)
 INSERT INTO public.city_images (city_id, image_url, user_id)
-SELECT 
-  c.id,
-  'https://images.unsplash.com/photo-1502602898737-459b34a21c44?w=800',
-  c.user_id
+SELECT c.id, 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800', c.user_id
 FROM public.cities c
-WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' 
-  AND c.name = 'París'
-LIMIT 1
+WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' AND c.name = 'Londres'
 ON CONFLICT DO NOTHING;
 
 INSERT INTO public.city_images (city_id, image_url, user_id)
-SELECT 
-  c.id,
-  'https://images.unsplash.com/photo-1555993530-0e0b7c0e8b0a?w=800',
-  c.user_id
+SELECT c.id, 'https://images.unsplash.com/photo-1520986606214-8b456906c813?w=800', c.user_id
 FROM public.cities c
-WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' 
-  AND c.name = 'Barcelona'
-LIMIT 1
+WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' AND c.name = 'Londres'
+ON CONFLICT DO NOTHING;
+
+-- Rest of user 1's cities (1 image each)
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1587330979470-3595ac045ab0?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' AND c.name = 'Berlín'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' AND c.name = 'Dubái'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' AND c.name = 'Sídney'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' AND c.name = 'Seúl'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' AND c.name = 'Bangkok'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' AND c.name = 'Singapur'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1536599018102-9f803c140fc1?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' AND c.name = 'Hong Kong'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1539650116574-75c0c6d73a6e?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' AND c.name = 'Cairo'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1582979512210-99b6a53386f9?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12' AND c.name = 'Mumbai'
+ON CONFLICT DO NOTHING;
+
+-- Insert images for user 2's cities (15 cities total)
+-- First 5 cities will have 2 images each, remaining 10 will have 1 image each
+
+-- Barcelona (2 images)
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' AND c.name = 'Barcelona'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1555993530-0e0b7c0e8b0a?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' AND c.name = 'Barcelona'
+ON CONFLICT DO NOTHING;
+
+-- Amsterdam (2 images)
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' AND c.name = 'Amsterdam'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1533050487297-09b450131914?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' AND c.name = 'Amsterdam'
+ON CONFLICT DO NOTHING;
+
+-- Santorini (2 images)
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1541849546-216549ae216d?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' AND c.name = 'Santorini'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' AND c.name = 'Santorini'
+ON CONFLICT DO NOTHING;
+
+-- Viena (2 images)
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' AND c.name = 'Viena'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1551884170-09fb70a3a2ed?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' AND c.name = 'Viena'
+ON CONFLICT DO NOTHING;
+
+-- Estambul (2 images)
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' AND c.name = 'Estambul'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1527838832700-5059252407fa?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' AND c.name = 'Estambul'
+ON CONFLICT DO NOTHING;
+
+-- Rest of user 2's cities (1 image each)
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1555993530-0e0b7c0e8b0a?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' AND c.name = 'Praga'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' AND c.name = 'Lisboa'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' AND c.name = 'Marrakech'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1539650116574-75c0c6d73a6e?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' AND c.name = 'Reykjavik'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' AND c.name = 'Copenhague'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' AND c.name = 'Edimburgo'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' AND c.name = 'Dublín'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1555993530-0e0b7c0e8b0a?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' AND c.name = 'Brujas'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO public.city_images (city_id, image_url, user_id)
+SELECT c.id, 'https://images.unsplash.com/photo-1520175480921-4edfa2983e0f?w=800', c.user_id
+FROM public.cities c
+WHERE c.user_id = '90140f28-583c-4f6e-b437-d0b48bfa0a32' AND c.name = 'Florencia'
 ON CONFLICT DO NOTHING;
 
