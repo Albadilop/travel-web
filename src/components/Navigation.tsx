@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import AddCityDialog from "@/components/AddCityDialog";
-import { MapPin, User, Plus, Menu, LogOut, X } from "lucide-react";
+import { MapPin, User, Plus, Menu, LogOut, X, Map } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -39,11 +39,13 @@ const Navigation = () => {
               <>
                 <Link to="/map">
                   <Button variant="ghost" className="rounded-full text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors">
+                    <Map className="h-4 w-4 mr-2" />
                     Mi Mapa
                   </Button>
                 </Link>
                 <Link to="/cities">
                   <Button variant="ghost" className="rounded-full text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors">
+                    <MapPin className="h-4 w-4 mr-2" />
                     Mis Ciudades
                   </Button>
                 </Link>
@@ -94,16 +96,18 @@ const Navigation = () => {
                 <>
                   <Link 
                     to="/map" 
-                    className="px-4 py-2 text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 rounded-md transition-colors"
+                    className="px-4 py-2 text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 rounded-md transition-colors flex items-center gap-2"
                     onClick={() => setMobileMenuOpen(false)}
                   >
+                    <Map className="h-4 w-4" />
                     Mi Mapa
                   </Link>
                   <Link 
                     to="/cities" 
-                    className="px-4 py-2 text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 rounded-md transition-colors"
+                    className="px-4 py-2 text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 rounded-md transition-colors flex items-center gap-2"
                     onClick={() => setMobileMenuOpen(false)}
                   >
+                    <MapPin className="h-4 w-4" />
                     Mis Ciudades
                   </Link>
                 </>
