@@ -98,6 +98,46 @@ VALUES
     4,
     '2024-03-12',
     'Lluvia típica pero la cultura y los museos compensan. El British Museum es increíble.'
+  ),
+  (
+    '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12',
+    'Berlín',
+    'Alemania',
+    52.5200066,
+    13.404954,
+    5,
+    '2024-05-18',
+    'Una ciudad llena de historia y cultura. El Muro de Berlín y los museos son fascinantes.'
+  ),
+  (
+    '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12',
+    'Dubái',
+    'Emiratos Árabes Unidos',
+    25.2048493,
+    55.2707828,
+    4,
+    '2024-07-22',
+    'Lujo y modernidad en el desierto. Los rascacielos y las islas artificiales son impresionantes.'
+  ),
+  (
+    '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12',
+    'Sídney',
+    'Australia',
+    -33.8688197,
+    151.2092955,
+    5,
+    '2024-09-10',
+    'La Ópera de Sídney es icónica. Las playas y el puerto son espectaculares.'
+  ),
+  (
+    '4ad9621c-4d3d-4b71-a6cc-34d6e8deaa12',
+    'Seúl',
+    'Corea del Sur',
+    37.566535,
+    126.9779692,
+    4,
+    '2024-11-05',
+    'Tecnología y tradición se mezclan perfectamente. La comida callejera es increíble.'
   )
 ON CONFLICT DO NOTHING;
 
@@ -153,6 +193,46 @@ VALUES
     4,
     '2024-08-15',
     'Ciudad con mucho carácter. Los pasteles de nata son deliciosos.'
+  ),
+  (
+    '90140f28-583c-4f6e-b437-d0b48bfa0a32',
+    'Viena',
+    'Austria',
+    48.2081743,
+    16.3738189,
+    5,
+    '2024-09-28',
+    'La capital de la música clásica. Los palacios y la arquitectura barroca son hermosos.'
+  ),
+  (
+    '90140f28-583c-4f6e-b437-d0b48bfa0a32',
+    'Estambul',
+    'Turquía',
+    41.0082376,
+    28.9783589,
+    5,
+    '2024-10-12',
+    'Donde se encuentran Europa y Asia. La Mezquita Azul y el Bósforo son inolvidables.'
+  ),
+  (
+    '90140f28-583c-4f6e-b437-d0b48bfa0a32',
+    'Marrakech',
+    'Marruecos',
+    31.6294723,
+    -7.9810845,
+    4,
+    '2024-11-20',
+    'Una explosión de colores y aromas. Los zocos y la plaza Jemaa el-Fnaa son mágicos.'
+  ),
+  (
+    '90140f28-583c-4f6e-b437-d0b48bfa0a32',
+    'Reykjavik',
+    'Islandia',
+    64.146582,
+    -21.9426354,
+    5,
+    '2024-12-15',
+    'La capital más al norte del mundo. Las auroras boreales y los géiseres son únicos.'
   )
 ON CONFLICT DO NOTHING;
 
