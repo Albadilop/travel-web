@@ -38,12 +38,12 @@ const Navigation = () => {
             {user && (
               <>
                 <Link to="/map">
-                  <Button variant="ghost" className="text-foreground hover:text-primary">
+                  <Button variant="ghost" className="text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors">
                     Mi Mapa
                   </Button>
                 </Link>
                 <Link to="/cities">
-                  <Button variant="ghost" className="text-foreground hover:text-primary">
+                  <Button variant="ghost" className="text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors">
                     Mis Ciudades
                   </Button>
                 </Link>
@@ -53,7 +53,7 @@ const Navigation = () => {
               <>
                 <Button 
                   variant="ghost" 
-                  className="text-foreground hover:text-primary"
+                  className="text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors"
                   onClick={handleSignOut}
                 >
                   <LogOut className="h-4 w-4 mr-2" />
@@ -63,7 +63,7 @@ const Navigation = () => {
               </>
             ) : (
               <Link to="/auth">
-                <Button variant="ghost" className="text-foreground hover:text-primary">
+                <Button variant="ghost" className="text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors">
                   <User className="h-4 w-4 mr-2" />
                   Iniciar Sesión
                 </Button>
@@ -94,14 +94,14 @@ const Navigation = () => {
                 <>
                   <Link 
                     to="/map" 
-                    className="px-4 py-2 text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors"
+                    className="px-4 py-2 text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 rounded-md transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Mi Mapa
                   </Link>
                   <Link 
                     to="/cities" 
-                    className="px-4 py-2 text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors"
+                    className="px-4 py-2 text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 rounded-md transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Mis Ciudades
@@ -118,7 +118,7 @@ const Navigation = () => {
                       handleSignOut();
                       setMobileMenuOpen(false);
                     }}
-                    className="px-4 py-2 text-left text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors flex items-center gap-2"
+                    className="px-4 py-2 text-left text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 rounded-md transition-colors flex items-center gap-2"
                   >
                     <LogOut className="h-4 w-4" />
                     Cerrar Sesión
@@ -127,7 +127,7 @@ const Navigation = () => {
               ) : (
                 <Link 
                   to="/auth" 
-                  className="px-4 py-2 text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors flex items-center gap-2"
+                  className="px-4 py-2 text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 rounded-md transition-colors flex items-center gap-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <User className="h-4 w-4" />
