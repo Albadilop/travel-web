@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import ImageCarousel from "./ImageCarousel";
 import type { City } from "@/hooks/useCities";
+import { useTranslation } from "react-i18next";
 
 interface CityImage {
   id: string;
@@ -19,6 +20,7 @@ interface CityDetailModalProps {
 }
 
 const CityDetailModal = ({ city, open, onOpenChange }: CityDetailModalProps) => {
+  const { t } = useTranslation();
   const [images, setImages] = useState<CityImage[]>([]);
   const [loadingImages, setLoadingImages] = useState(false);
   const [showCarousel, setShowCarousel] = useState(false);
@@ -71,14 +73,14 @@ const CityDetailModal = ({ city, open, onOpenChange }: CityDetailModalProps) => 
               </Badge>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Calendar className="h-4 w-4" />
-                <span>Visitada el {city.visit_date}</span>
+                <span>{t('cityDetail.visitedOn', { date: city.visit_date })}</span>
               </div>
             </div>
 
             {/* Comment */}
             {city.comment && (
               <div>
-                <h3 className="font-semibold text-foreground mb-2">Comentarios</h3>
+                <h3 className="font-semibold text-foreground mb-2">{t('cityDetail.comments')}</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   {city.comment}
                 </p>
@@ -90,7 +92,7 @@ const CityDetailModal = ({ city, open, onOpenChange }: CityDetailModalProps) => 
               <div className="flex items-center justify-between mb-3">
                 <h3 className="font-semibold text-foreground flex items-center gap-2">
                   <ImageIcon className="h-4 w-4" />
-                  Fotos ({images.length})
+                  {t('cityDetail.photosCount', { count: images.length })}
                 </h3>
                 {images.length > 0 && (
                   <Button
@@ -98,7 +100,7 @@ const CityDetailModal = ({ city, open, onOpenChange }: CityDetailModalProps) => 
                     size="sm"
                     onClick={() => setShowCarousel(true)}
                   >
-                    Ver Galería
+                    {t('cityDetail.viewGallery')}
                   </Button>
                 )}
               </div>
@@ -135,16 +137,16 @@ const CityDetailModal = ({ city, open, onOpenChange }: CityDetailModalProps) => 
               ) : (
                 <div className="text-center py-8 text-muted-foreground">
                   <ImageIcon className="h-12 w-12 mx-auto mb-2 opacity-50" />
-                  <p>No hay fotos disponibles</p>
+                  <p>{t('cityDetail.noPhotos')}</p>
                 </div>
               )}
             </div>
 
             {/* Location Info */}
             <div className="bg-muted/30 rounded-lg p-4">
-              <h3 className="font-semibold text-foreground mb-2">Ubicación</h3>
+              <h3 className="font-semibold text-foreground mb-2">{t('cityDetail.location')}</h3>
               <p className="text-muted-foreground text-sm">
-                Coordenadas: {city.latitude}°, {city.longitude}°
+                {t('cityDetail.coordinates', { lat: city.latitude, lng: city.longitude })}
               </p>
             </div>
           </div>

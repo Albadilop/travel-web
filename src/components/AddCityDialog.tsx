@@ -8,6 +8,7 @@ import { Plus, MapPin, Star, Upload, Loader2, X } from 'lucide-react';
 import { useCities } from '@/hooks/useCities';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useTranslation } from 'react-i18next';
 
 interface AddCityDialogProps {
   trigger?: React.ReactNode;
@@ -30,6 +31,7 @@ const AddCityDialog = ({ trigger }: AddCityDialogProps) => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const { addCity } = useCities();
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   // Auto-geocode when city name and country change
   const handleCityChange = useCallback(async (name: string) => {
@@ -51,8 +53,8 @@ const AddCityDialog = ({ trigger }: AddCityDialogProps) => {
             longitude: data.longitude.toString()
           }));
           toast({
-            title: "Coordenadas encontradas",
-            description: `${data.placeName || name} geocodificado automáticamente.`,
+            title: t('addCity.coordinatesFound'),
+            description: t('addCity.coordinatesFoundDesc', { placeName: data.placeName || name }),
           });
         }
       } catch (error) {
@@ -102,8 +104,8 @@ const AddCityDialog = ({ trigger }: AddCityDialogProps) => {
       // Validate file type
       if (!file.type.startsWith('image/')) {
         toast({
-          title: "Error",
-          description: `${file.name} no es un archivo de imagen válido.`,
+          title: t('addCity.error'),
+          description: t('addCity.invalidImage', { fileName: file.name }),
           variant: "destructive",
         });
         continue;
@@ -112,8 +114,8 @@ const AddCityDialog = ({ trigger }: AddCityDialogProps) => {
       // Validate file size (max 5MB)
       if (file.size > 5 * 1024 * 1024) {
         toast({
-          title: "Error",
-          description: `${file.name} es demasiado grande. Máximo 5MB.`,
+          title: t('addCity.error'),
+          description: t('addCity.fileTooLarge', { fileName: file.name }),
           variant: "destructive",
         });
         continue;
@@ -177,11 +179,11 @@ const AddCityDialog = ({ trigger }: AddCityDialogProps) => {
       if (error) throw error;
     } catch (error) {
       console.error('Error uploading city images:', error);
-      toast({
-        title: "Advertencia",
-        description: "La ciudad se creó pero hubo un problema con las imágenes.",
-        variant: "destructive",
-      });
+          toast({
+            title: t('addCity.warning'),
+            description: t('addCity.imageUploadWarning'),
+            variant: "destructive",
+          });
     }
   };
 
@@ -215,8 +217,8 @@ const AddCityDialog = ({ trigger }: AddCityDialogProps) => {
 
         if (successfulUploads.length !== selectedFiles.length) {
           toast({
-            title: "Advertencia",
-            description: `Solo ${successfulUploads.length} de ${selectedFiles.length} imágenes se subieron correctamente.`,
+            title: t('addCity.warning'),
+            description: t('addCity.partialUpload', { successful: successfulUploads.length, total: selectedFiles.length }),
             variant: "destructive",
           });
         }
@@ -246,7 +248,7 @@ const AddCityDialog = ({ trigger }: AddCityDialogProps) => {
   const defaultTrigger = (
     <Button className="bg-gradient-warm hover:opacity-90 transition-all duration-300 rounded-full">
       <Plus className="h-4 w-4 mr-2" />
-      Añadir Ciudad
+      {t('addCity.add')}
     </Button>
   );
 
@@ -259,20 +261,20 @@ const AddCityDialog = ({ trigger }: AddCityDialogProps) => {
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 font-poppins">
             <MapPin className="h-5 w-5 text-primary" />
-            Añadir Nueva Ciudad
+            {t('addCity.title')}
           </DialogTitle>
         </DialogHeader>
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Ciudad *</Label>
+              <Label htmlFor="name">{t('addCity.city')} {t('common.required')}</Label>
               <div className="relative">
                 <Input
                   id="name"
                   value={formData.name}
                   onChange={(e) => handleCityChange(e.target.value)}
-                  placeholder="París"
+                  placeholder={t('addCity.cityPlaceholder')}
                   required
                 />
                 {geocoding && (
@@ -281,12 +283,12 @@ const AddCityDialog = ({ trigger }: AddCityDialogProps) => {
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="country">País *</Label>
+              <Label htmlFor="country">{t('addCity.country')} {t('common.required')}</Label>
               <Input
                 id="country"
                 value={formData.country}
                 onChange={(e) => handleCountryChange(e.target.value)}
-                placeholder="Francia"
+                placeholder={t('addCity.countryPlaceholder')}
                 required
               />
             </div>
@@ -294,7 +296,7 @@ const AddCityDialog = ({ trigger }: AddCityDialogProps) => {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="latitude">Latitud *</Label>
+              <Label htmlFor="latitude">{t('addCity.latitude')} {t('common.required')}</Label>
               <Input
                 id="latitude"
                 type="number"
@@ -308,7 +310,7 @@ const AddCityDialog = ({ trigger }: AddCityDialogProps) => {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="longitude">Longitud *</Label>
+              <Label htmlFor="longitude">{t('addCity.longitude')} {t('common.required')}</Label>
               <Input
                 id="longitude"
                 type="number"
@@ -325,7 +327,7 @@ const AddCityDialog = ({ trigger }: AddCityDialogProps) => {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="rating">Valoración *</Label>
+              <Label htmlFor="rating">{t('addCity.rating')} {t('common.required')}</Label>
               <div className="flex items-center gap-2">
                 <select
                   id="rating"
@@ -342,7 +344,7 @@ const AddCityDialog = ({ trigger }: AddCityDialogProps) => {
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="visit_date">Fecha de Visita *</Label>
+              <Label htmlFor="visit_date">{t('addCity.visitDate')} {t('common.required')}</Label>
               <Input
                 id="visit_date"
                 type="date"
@@ -354,14 +356,14 @@ const AddCityDialog = ({ trigger }: AddCityDialogProps) => {
           </div>
 
           <div className="space-y-2">
-            <Label>Imágenes de la Ciudad</Label>
+            <Label>{t('addCity.images')}</Label>
             <div>
               <Label htmlFor="image-files" className="cursor-pointer">
                 <div className="flex items-center justify-center w-full h-20 border-2 border-dashed border-muted-foreground/25 rounded-md hover:border-muted-foreground/50 transition-colors">
                   <div className="flex items-center gap-2 text-muted-foreground">
                     <Upload className="h-4 w-4" />
                     <span className="text-sm">
-                      Seleccionar imágenes ({selectedFiles.length}/10)
+                      {t('addCity.selectImages')} ({t('addCity.imagesCount', { count: selectedFiles.length })})
                     </span>
                   </div>
                 </div>
@@ -400,12 +402,12 @@ const AddCityDialog = ({ trigger }: AddCityDialogProps) => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="comment">Comentarios</Label>
+            <Label htmlFor="comment">{t('addCity.comment')}</Label>
             <Textarea
               id="comment"
               value={formData.comment}
               onChange={(e) => setFormData(prev => ({ ...prev, comment: e.target.value }))}
-              placeholder="Comparte tus recuerdos de esta ciudad..."
+              placeholder={t('addCity.commentPlaceholder')}
               rows={3}
             />
           </div>
@@ -417,7 +419,7 @@ const AddCityDialog = ({ trigger }: AddCityDialogProps) => {
               onClick={() => setOpen(false)}
               className="flex-1"
             >
-              Cancelar
+              {t('addCity.cancel')}
             </Button>
             <Button
               type="submit"
@@ -427,15 +429,15 @@ const AddCityDialog = ({ trigger }: AddCityDialogProps) => {
               {loading ? (
                 <>
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  Añadiendo...
+                  {t('addCity.adding')}
                 </>
               ) : uploading ? (
                 <>
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  Subiendo imágenes...
+                  {t('addCity.uploading')}
                 </>
               ) : (
-                'Añadir Ciudad'
+                t('addCity.add')
               )}
             </Button>
           </div>

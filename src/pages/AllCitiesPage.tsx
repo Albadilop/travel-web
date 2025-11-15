@@ -5,10 +5,12 @@ import CityRanking from "@/components/CityRanking";
 import { useCities } from "@/hooks/useCities";
 import { useAuth } from "@/hooks/useAuth";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const AllCitiesPage = () => {
   const { cities, loading } = useCities();
   const { user, loading: authLoading } = useAuth();
+  const { t } = useTranslation();
   const [filters, setFilters] = useState({
     rating: null as number | null,
     year: null as number | null,
@@ -36,7 +38,7 @@ const AllCitiesPage = () => {
         <div className="container mx-auto px-6 pt-24">
           <div className="text-center py-12">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-            <p className="text-muted-foreground">Cargando...</p>
+            <p className="text-muted-foreground">{t('cities.loading')}</p>
           </div>
         </div>
       </div>
@@ -50,10 +52,10 @@ const AllCitiesPage = () => {
         <div className="container mx-auto px-6 pt-24">
           <div className="text-center py-12">
             <h1 className="text-3xl font-bold font-poppins text-foreground mb-4">
-              Inicia Sesión
+              {t('cities.signInRequired')}
             </h1>
             <p className="text-muted-foreground">
-              Debes iniciar sesión para ver todas tus ciudades.
+              {t('cities.signInRequiredDesc')}
             </p>
           </div>
         </div>
@@ -67,10 +69,10 @@ const AllCitiesPage = () => {
       <div className="container mx-auto px-6 pt-24">
         <div className="mb-8">
           <h1 className="text-3xl md:text-4xl font-bold font-poppins text-foreground mb-4">
-            Todas Mis Ciudades
+            {t('cities.allCities')}
           </h1>
           <p className="text-lg text-black mb-6">
-            <span className="font-semibold text-foreground">{cities.length}</span> destinos en tu diario de viajes
+            <span className="font-semibold text-foreground">{cities.length}</span> {t('cities.destinationsInDiary')}
           </p>
         </div>
 
@@ -99,10 +101,10 @@ const AllCitiesPage = () => {
             ) : (
               <div className="text-center py-12">
                 <h3 className="text-lg font-semibold text-foreground mb-2">
-                  No se encontraron ciudades
+                  {t('cities.noCitiesFound')}
                 </h3>
                 <p className="text-muted-foreground">
-                  Ajusta los filtros o añade más ciudades a tu diario.
+                  {t('cities.adjustFilters')}
                 </p>
               </div>
             )}

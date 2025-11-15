@@ -7,6 +7,7 @@ import EditCityDialog from "@/components/EditCityDialog";
 import CityImageCarousel from "@/components/CityImageCarousel";
 import ImageCarousel from "@/components/ImageCarousel";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface CityCardProps {
   city: City;
@@ -18,9 +19,10 @@ const CityCard = ({ city }: CityCardProps) => {
   const [carouselImages, setCarouselImages] = useState<Array<{id: string; image_url: string}>>([]);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const { deleteCity } = useCities();
+  const { t } = useTranslation();
 
   const handleDelete = async () => {
-    if (confirm(`¿Estás seguro de que quieres eliminar ${city.name}?`)) {
+    if (confirm(t('cityCard.deleteConfirm', { cityName: city.name }))) {
       await deleteCity(city.id);
     }
   };

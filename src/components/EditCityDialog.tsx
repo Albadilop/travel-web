@@ -8,6 +8,7 @@ import { MapPin, Star, Upload, Loader2, X } from 'lucide-react';
 import { useCities, type City } from '@/hooks/useCities';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useTranslation } from 'react-i18next';
 
 interface EditCityDialogProps {
   city: City;
@@ -31,6 +32,7 @@ const EditCityDialog = ({ city, open, onOpenChange }: EditCityDialogProps) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { updateCity } = useCities();
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   // Auto-geocode when city name and country change
   const handleCityChange = useCallback(async (name: string) => {
@@ -52,8 +54,8 @@ const EditCityDialog = ({ city, open, onOpenChange }: EditCityDialogProps) => {
             longitude: data.longitude.toString()
           }));
           toast({
-            title: "Coordenadas encontradas",
-            description: `${data.placeName || name} geocodificado automáticamente.`,
+            title: t('editCity.coordinatesFound'),
+            description: t('editCity.coordinatesFoundDesc', { placeName: data.placeName || name }),
           });
         }
       } catch (error) {
@@ -101,8 +103,8 @@ const EditCityDialog = ({ city, open, onOpenChange }: EditCityDialogProps) => {
       // Validate file type
       if (!file.type.startsWith('image/')) {
         toast({
-          title: "Error",
-          description: "Por favor selecciona un archivo de imagen válido.",
+          title: t('editCity.error'),
+          description: t('editCity.invalidImage'),
           variant: "destructive",
         });
         return;
@@ -111,8 +113,8 @@ const EditCityDialog = ({ city, open, onOpenChange }: EditCityDialogProps) => {
       // Validate file size (max 5MB)
       if (file.size > 5 * 1024 * 1024) {
         toast({
-          title: "Error",
-          description: "El archivo es demasiado grande. Máximo 5MB.",
+          title: t('editCity.error'),
+          description: t('editCity.fileTooLarge'),
           variant: "destructive",
         });
         return;
@@ -150,8 +152,8 @@ const EditCityDialog = ({ city, open, onOpenChange }: EditCityDialogProps) => {
     } catch (error) {
       console.error('Image upload failed:', error);
       toast({
-        title: "Error",
-        description: "No se pudo subir la imagen.",
+        title: t('editCity.error'),
+        description: t('editCity.uploadError'),
         variant: "destructive",
       });
       return null;
@@ -209,20 +211,20 @@ const EditCityDialog = ({ city, open, onOpenChange }: EditCityDialogProps) => {
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 font-poppins">
             <MapPin className="h-5 w-5 text-primary" />
-            Editar Ciudad
+            {t('editCity.title')}
           </DialogTitle>
         </DialogHeader>
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Ciudad *</Label>
+              <Label htmlFor="name">{t('editCity.city')} {t('common.required')}</Label>
               <div className="relative">
                 <Input
                   id="name"
                   value={formData.name}
                   onChange={(e) => handleCityChange(e.target.value)}
-                  placeholder="París"
+                  placeholder={t('editCity.cityPlaceholder')}
                   required
                 />
                 {geocoding && (
@@ -231,12 +233,12 @@ const EditCityDialog = ({ city, open, onOpenChange }: EditCityDialogProps) => {
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="country">País *</Label>
+              <Label htmlFor="country">{t('editCity.country')} {t('common.required')}</Label>
               <Input
                 id="country"
                 value={formData.country}
                 onChange={(e) => handleCountryChange(e.target.value)}
-                placeholder="Francia"
+                placeholder={t('editCity.countryPlaceholder')}
                 required
               />
             </div>
@@ -244,7 +246,7 @@ const EditCityDialog = ({ city, open, onOpenChange }: EditCityDialogProps) => {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="latitude">Latitud *</Label>
+              <Label htmlFor="latitude">{t('editCity.latitude')} {t('common.required')}</Label>
               <Input
                 id="latitude"
                 type="number"
@@ -258,7 +260,7 @@ const EditCityDialog = ({ city, open, onOpenChange }: EditCityDialogProps) => {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="longitude">Longitud *</Label>
+              <Label htmlFor="longitude">{t('editCity.longitude')} {t('common.required')}</Label>
               <Input
                 id="longitude"
                 type="number"
@@ -275,7 +277,7 @@ const EditCityDialog = ({ city, open, onOpenChange }: EditCityDialogProps) => {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="rating">Valoración *</Label>
+              <Label htmlFor="rating">{t('editCity.rating')} {t('common.required')}</Label>
               <div className="flex items-center gap-2">
                 <select
                   id="rating"
@@ -292,7 +294,7 @@ const EditCityDialog = ({ city, open, onOpenChange }: EditCityDialogProps) => {
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="visit_date">Fecha de Visita *</Label>
+              <Label htmlFor="visit_date">{t('editCity.visitDate')} {t('common.required')}</Label>
               <Input
                 id="visit_date"
                 type="date"
@@ -304,7 +306,7 @@ const EditCityDialog = ({ city, open, onOpenChange }: EditCityDialogProps) => {
           </div>
 
           <div className="space-y-2">
-            <Label>Cambiar Imagen</Label>
+            <Label>{t('editCity.changeImage')}</Label>
             <div className="space-y-3">
               <div>
                 <Label htmlFor="image-file" className="cursor-pointer">
@@ -328,7 +330,7 @@ const EditCityDialog = ({ city, open, onOpenChange }: EditCityDialogProps) => {
                     ) : (
                       <div className="flex items-center gap-2 text-muted-foreground">
                         <Upload className="h-4 w-4" />
-                        <span className="text-sm">Seleccionar nueva imagen</span>
+                        <span className="text-sm">{t('editCity.selectNewImage')}</span>
                       </div>
                     )}
                   </div>
@@ -345,12 +347,12 @@ const EditCityDialog = ({ city, open, onOpenChange }: EditCityDialogProps) => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="comment">Comentarios</Label>
+            <Label htmlFor="comment">{t('editCity.comment')}</Label>
             <Textarea
               id="comment"
               value={formData.comment}
               onChange={(e) => setFormData(prev => ({ ...prev, comment: e.target.value }))}
-              placeholder="Comparte tus recuerdos de esta ciudad..."
+              placeholder={t('editCity.commentPlaceholder')}
               rows={3}
             />
           </div>
@@ -362,7 +364,7 @@ const EditCityDialog = ({ city, open, onOpenChange }: EditCityDialogProps) => {
               onClick={() => onOpenChange(false)}
               className="flex-1"
             >
-              Cancelar
+              {t('editCity.cancel')}
             </Button>
             <Button
               type="submit"
@@ -372,15 +374,15 @@ const EditCityDialog = ({ city, open, onOpenChange }: EditCityDialogProps) => {
               {loading ? (
                 <>
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  Guardando...
+                  {t('editCity.saving')}
                 </>
               ) : uploading ? (
                 <>
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  Subiendo imagen...
+                  {t('editCity.uploading')}
                 </>
               ) : (
-                'Guardar Cambios'
+                t('editCity.save')
               )}
             </Button>
           </div>

@@ -3,10 +3,12 @@ import AddCityDialog from "@/components/AddCityDialog";
 import { MapPin, Camera, Star } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import heroImage from "@/assets/travel-hero.jpg";
 
 const TravelHero = () => {
   const { user } = useAuth();
+  const { t } = useTranslation();
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -24,14 +26,14 @@ const TravelHero = () => {
       <div className="relative z-10 container mx-auto px-6 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold font-poppins text-black mb-6">
-            Tu Diario de
+            {t('hero.title')}
             <span className="block bg-gradient-warm bg-clip-text text-transparent">
-              Aventuras
+              {t('hero.titleHighlight')}
             </span>
           </h1>
           
           <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-black">
-            Guarda cada momento, cada ciudad y cada experiencia de tus viajes en un mapa interactivo lleno de recuerdos.
+            {t('hero.subtitle')}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
@@ -39,14 +41,14 @@ const TravelHero = () => {
               <Link to="/cities">
                 <Button size="lg" className="bg-gradient-warm hover:opacity-90 transition-all duration-300 shadow-warm text-lg px-8 py-6 rounded-full">
                   <MapPin className="mr-2 h-5 w-5" />
-                  Explorar Mis Viajes
+                  {t('hero.exploreTrips')}
                 </Button>
               </Link>
             ) : (
               <Link to="/auth">
                 <Button size="lg" className="bg-gradient-warm hover:opacity-90 transition-all duration-300 shadow-warm text-lg px-8 py-6 rounded-full">
                   <MapPin className="mr-2 h-5 w-5" />
-                  Comenzar Aventura
+                  {t('hero.startAdventure')}
                 </Button>
               </Link>
             )}
@@ -54,7 +56,7 @@ const TravelHero = () => {
               <AddCityDialog trigger={
                 <Button variant="outline" size="lg" className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground text-lg px-8 py-6 rounded-full">
                   <Camera className="mr-2 h-5 w-5" />
-                  Añadir Nueva Ciudad
+                  {t('hero.addNewCity')}
                 </Button>
               } />
             )}
@@ -64,15 +66,15 @@ const TravelHero = () => {
           <div className="flex flex-wrap justify-center gap-4">
             <div className="flex items-center gap-2 bg-card/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-card">
               <MapPin className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">Mapa Interactivo</span>
+              <span className="text-sm font-medium">{t('hero.interactiveMap')}</span>
             </div>
             <div className="flex items-center gap-2 bg-card/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-card">
               <Camera className="h-4 w-4 text-secondary" />
-              <span className="text-sm font-medium">Galería de Fotos</span>
+              <span className="text-sm font-medium">{t('hero.photoGallery')}</span>
             </div>
             <div className="flex items-center gap-2 bg-card/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-card">
               <Star className="h-4 w-4 text-accent" />
-              <span className="text-sm font-medium">Valoraciones</span>
+              <span className="text-sm font-medium">{t('hero.ratings')}</span>
             </div>
           </div>
         </div>

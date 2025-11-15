@@ -2,12 +2,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Trophy, Star, MapPin } from "lucide-react";
 import type { City } from "@/hooks/useCities";
+import { useTranslation } from "react-i18next";
 
 interface CityRankingProps {
   cities: City[];
 }
 
 const CityRanking = ({ cities }: CityRankingProps) => {
+  const { t } = useTranslation();
   const topCities = cities
     .filter(city => city.rating >= 4)
     .sort((a, b) => b.rating - a.rating)
@@ -19,12 +21,12 @@ const CityRanking = ({ cities }: CityRankingProps) => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Trophy className="h-5 w-5 text-accent" />
-            Top Ciudades
+            {t('cities.topCities')}
           </CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground text-sm">
-            Añade ciudades con valoración 4+ para ver el ranking
+            {t('cities.topCitiesDesc')}
           </p>
         </CardContent>
       </Card>
@@ -36,7 +38,7 @@ const CityRanking = ({ cities }: CityRankingProps) => {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Trophy className="h-5 w-5 text-accent" />
-          Top Ciudades
+          {t('cities.topCities')}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-3">

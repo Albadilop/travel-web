@@ -1,14 +1,17 @@
 import { Button } from "@/components/ui/button";
 import AddCityDialog from "@/components/AddCityDialog";
+import LanguageSelector from "@/components/LanguageSelector";
 import { MapPin, User, Plus, Menu, LogOut, X, Map } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Navigation = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { t } = useTranslation();
 
   const handleSignOut = async () => {
     try {
@@ -40,13 +43,13 @@ const Navigation = () => {
                 <Link to="/map">
                   <Button variant="ghost" className="rounded-full text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors">
                     <Map className="h-4 w-4 mr-2" />
-                    Mi Mapa
+                    {t('nav.myMap')}
                   </Button>
                 </Link>
                 <Link to="/cities">
                   <Button variant="ghost" className="rounded-full text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors">
                     <MapPin className="h-4 w-4 mr-2" />
-                    Mis Ciudades
+                    {t('nav.myCities')}
                   </Button>
                 </Link>
               </>
@@ -59,7 +62,7 @@ const Navigation = () => {
                   onClick={handleSignOut}
                 >
                   <LogOut className="h-4 w-4 mr-2" />
-                  Cerrar Sesión
+                  {t('nav.signOut')}
                 </Button>
                 <AddCityDialog />
               </>
@@ -67,10 +70,11 @@ const Navigation = () => {
               <Link to="/auth">
                 <Button variant="ghost" className="rounded-full text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors">
                   <User className="h-4 w-4 mr-2" />
-                  Iniciar Sesión
+                  {t('nav.signIn')}
                 </Button>
               </Link>
             )}
+            <LanguageSelector />
           </div>
 
           {/* Mobile Menu Button */}
@@ -100,7 +104,7 @@ const Navigation = () => {
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <Map className="h-4 w-4" />
-                    Mi Mapa
+                    {t('nav.myMap')}
                   </Link>
                   <Link 
                     to="/cities" 
@@ -108,7 +112,7 @@ const Navigation = () => {
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <MapPin className="h-4 w-4" />
-                    Mis Ciudades
+                    {t('nav.myCities')}
                   </Link>
                 </>
               )}
@@ -125,7 +129,7 @@ const Navigation = () => {
                     className="px-4 py-2 text-left text-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20 rounded-md transition-colors flex items-center gap-2"
                   >
                     <LogOut className="h-4 w-4" />
-                    Cerrar Sesión
+                    {t('nav.signOut')}
                   </button>
                 </>
               ) : (
@@ -135,9 +139,12 @@ const Navigation = () => {
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <User className="h-4 w-4" />
-                  Iniciar Sesión
+                  {t('nav.signIn')}
                 </Link>
               )}
+              <div className="px-4 py-2">
+                <LanguageSelector />
+              </div>
             </div>
           </div>
         )}

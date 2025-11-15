@@ -8,6 +8,7 @@ import { MapPin, Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const AuthPage = () => {
   const [email, setEmail] = useState('');
@@ -16,6 +17,7 @@ const AuthPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     // Check if user is already logged in
@@ -44,12 +46,12 @@ const AuthPage = () => {
       if (error) throw error;
 
       toast({
-        title: "¡Registro exitoso!",
-        description: "Revisa tu email para confirmar tu cuenta.",
+        title: t('auth.signUpSuccess'),
+        description: t('auth.signUpSuccessDesc'),
       });
     } catch (error: any) {
       toast({
-        title: "Error en el registro",
+        title: t('auth.signUpError'),
         description: error.message,
         variant: "destructive",
       });
@@ -71,13 +73,13 @@ const AuthPage = () => {
       if (error) throw error;
 
       toast({
-        title: "¡Bienvenido!",
-        description: "Has iniciado sesión correctamente.",
+        title: t('auth.signInSuccess'),
+        description: t('auth.signInSuccessDesc'),
       });
       navigate('/');
     } catch (error: any) {
       toast({
-        title: "Error en el inicio de sesión",
+        title: t('auth.signInError'),
         description: error.message,
         variant: "destructive",
       });
@@ -99,33 +101,33 @@ const AuthPage = () => {
             </span>
           </div>
           <p className="text-black">
-            Guarda y comparte tus aventuras de viaje
+            {t('auth.subtitle')}
           </p>
         </div>
 
         <Card className="shadow-elevation">
           <CardHeader>
             <CardTitle className="text-center font-poppins">
-              Accede a tu diario
+              {t('auth.title')}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="signin" className="w-full">
               <TabsList className="grid w-full grid-cols-2 mb-6">
-                <TabsTrigger value="signin">Iniciar Sesión</TabsTrigger>
-                <TabsTrigger value="signup">Registrarse</TabsTrigger>
+                <TabsTrigger value="signin">{t('auth.signIn')}</TabsTrigger>
+                <TabsTrigger value="signup">{t('auth.signUp')}</TabsTrigger>
               </TabsList>
               
               <TabsContent value="signin">
                 <form onSubmit={handleSignIn} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="signin-email">Email</Label>
+                    <Label htmlFor="signin-email">{t('auth.email')}</Label>
                     <div className="relative">
                       <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="signin-email"
                         type="email"
-                        placeholder="tu@email.com"
+                        placeholder={t('auth.emailPlaceholder')}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         className="pl-10"
@@ -135,13 +137,13 @@ const AuthPage = () => {
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="signin-password">Contraseña</Label>
+                    <Label htmlFor="signin-password">{t('auth.password')}</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="signin-password"
                         type={showPassword ? "text" : "password"}
-                        placeholder="••••••••"
+                        placeholder={t('auth.passwordPlaceholder')}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         className="pl-10 pr-10"
@@ -166,7 +168,7 @@ const AuthPage = () => {
                     disabled={loading}
                     className="w-full bg-gradient-warm hover:opacity-90"
                   >
-                    {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
+                    {loading ? t('auth.signingIn') : t('auth.signInButton')}
                   </Button>
                 </form>
               </TabsContent>
@@ -174,13 +176,13 @@ const AuthPage = () => {
               <TabsContent value="signup">
                 <form onSubmit={handleSignUp} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="signup-email">Email</Label>
+                    <Label htmlFor="signup-email">{t('auth.email')}</Label>
                     <div className="relative">
                       <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="signup-email"
                         type="email"
-                        placeholder="tu@email.com"
+                        placeholder={t('auth.emailPlaceholder')}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         className="pl-10"
@@ -190,13 +192,13 @@ const AuthPage = () => {
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="signup-password">Contraseña</Label>
+                    <Label htmlFor="signup-password">{t('auth.password')}</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="signup-password"
                         type={showPassword ? "text" : "password"}
-                        placeholder="••••••••"
+                        placeholder={t('auth.passwordPlaceholder')}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         className="pl-10 pr-10"
@@ -222,7 +224,7 @@ const AuthPage = () => {
                     disabled={loading}
                     className="w-full bg-gradient-warm hover:opacity-90"
                   >
-                    {loading ? 'Registrando...' : 'Crear Cuenta'}
+                    {loading ? t('auth.registering') : t('auth.signUpButton')}
                   </Button>
                 </form>
               </TabsContent>
