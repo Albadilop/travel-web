@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Travel Diary Design System - Warm & Inviting */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* Core warm palette */
+    --background: 42 45% 94%; /* #FAF3E0 - warm beige */
+    --foreground: 0 0% 20%; /* #333333 - dark gray text */
+
+    --card: 0 0% 100%; /* Pure white for cards */
+    --card-foreground: 0 0% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 20%;
+
+    /* Travel-inspired primary colors */
+    --primary: 33 100% 50%; /* #FF9F00 - warm orange */
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 33 100% 45%;
+
+    /* Golden accent */
+    --secondary: 42 90% 55%; /* #F5A623 - golden yellow */
+    --secondary-foreground: 0 0% 20%;
+    --secondary-hover: 42 90% 50%;
+
+    /* Coral accent */
+    --accent: 8 85% 67%; /* #FF6F61 - coral red */
+    --accent-foreground: 0 0% 100%;
+
+    /* Soft pink for special elements */
+    --soft-pink: 340 42% 85%; /* #F1C6D3 */
+    --soft-pink-foreground: 0 0% 20%;
+
+    /* Neutral tones */
+    --muted: 42 25% 90%;
+    --muted-foreground: 0 0% 69%; /* #B0B0B0 - light gray */
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 42 25% 85%;
+    --input: 42 25% 88%;
+    --ring: 33 100% 50%;
+
+    /* Travel-specific gradients */
+    --gradient-warm: linear-gradient(135deg, hsl(33 100% 50%), hsl(42 90% 55%));
+    --gradient-sunset: linear-gradient(135deg, hsl(8 85% 67%), hsl(33 100% 50%));
+    --gradient-soft: linear-gradient(180deg, hsl(42 45% 98%), hsl(42 45% 94%));
+
+    /* Shadows */
+    --shadow-warm: 0 4px 20px hsl(33 100% 50% / 0.1);
+    --shadow-card: 0 2px 12px hsl(0 0% 0% / 0.08);
+    --shadow-elevation: 0 8px 30px hsl(0 0% 0% / 0.12);
+
+    /* Animation */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  }
+
+  /* Dark mode - travel-themed night palette */
+  .dark {
+    --background: 0 0% 8%;
+    --foreground: 42 30% 92%;
+    
+    --card: 0 0% 12%;
+    --card-foreground: 42 30% 92%;
+    
+    --primary: 33 100% 60%;
+    --primary-foreground: 0 0% 8%;
+    
+    --secondary: 42 50% 25%;
+    --secondary-foreground: 42 30% 92%;
+    
+    --accent: 8 85% 55%;
+    --accent-foreground: 0 0% 100%;
+    
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+    
+    --border: 0 0% 20%;
+    --input: 0 0% 18%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-['Inter'];
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-['Poppins'];
+  }
+}
