@@ -50,18 +50,13 @@ const TravelHero = () => {
                 </Button>
               </Link>
             )}
-            {user ? (
+            {user && (
               <AddCityDialog trigger={
                 <Button variant="outline" size="lg" className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground text-lg px-8 py-6">
                   <Camera className="mr-2 h-5 w-5" />
                   Añadir Nueva Ciudad
                 </Button>
               } />
-            ) : (
-              <Button variant="outline" size="lg" className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground text-lg px-8 py-6">
-                <Camera className="mr-2 h-5 w-5" />
-                Descubrir Más
-              </Button>
             )}
           </div>
 

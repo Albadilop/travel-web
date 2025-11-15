@@ -73,7 +73,7 @@ const CityRanking = ({ cities }: CityRankingProps) => {
             
             <Badge className="flex items-center gap-1 bg-accent/20 text-accent border-accent/30">
               <Star className="h-3 w-3 fill-current" />
-              {city.rating}
+              <span className="text-black">{city.rating}</span>
             </Badge>
           </div>
         ))}

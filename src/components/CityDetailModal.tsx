@@ -67,7 +67,7 @@ const CityDetailModal = ({ city, open, onOpenChange }: CityDetailModalProps) => 
             <div className="flex items-center gap-4 flex-wrap">
               <Badge className="bg-accent/20 text-accent border-accent/30 flex items-center gap-1">
                 <Star className="h-4 w-4 fill-current" />
-                {city.rating}/5
+                <span className="text-black">{city.rating}</span>/5
               </Badge>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Calendar className="h-4 w-4" />

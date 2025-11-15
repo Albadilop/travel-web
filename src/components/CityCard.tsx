@@ -65,7 +65,7 @@ const CityCard = ({ city }: CityCardProps) => {
         <div className="absolute top-3 left-3">
           <Badge className="bg-card/90 backdrop-blur-sm border-0 shadow-card">
             <Star className="h-3 w-3 text-accent mr-1 fill-current" />
-            {city.rating}
+            <span className="text-black">{city.rating}</span>
           </Badge>
         </div>
       </div>
